@@ -6,6 +6,7 @@ import { ordinal, studyYear, DEGREE_YEARS } from "@/lib/utils";
 import SectionHeader from "@/components/SectionHeader";
 import { Reveal, RevealWords } from "@/components/Reveal";
 import SpotlightCard from "@/components/SpotlightCard";
+import Portrait from "@/components/Portrait";
 
 export default function About() {
   const edu = education[0];
@@ -42,7 +43,8 @@ export default function About() {
             </div>
           </div>
 
-          <Reveal className="lg:col-span-5" delay={0.1}>
+          <Reveal className="space-y-4 lg:col-span-5" delay={0.1}>
+            <Portrait />
             <SpotlightCard className="p-0">
               <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-3">
                 <span className="mono-label">identity.json</span>

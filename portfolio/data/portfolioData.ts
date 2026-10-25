@@ -16,11 +16,14 @@ export const profile = {
   location: "Kathmandu, Nepal",
   locationShort: "KATHMANDU, NP",
   timeZone: "Asia/Kathmandu",
+  // Put your photo at public/profile.jpg (any .jpg/.png works: change the name here).
+  // If the file is missing, the portrait block simply doesn't render.
+  photo: "",
   links: {
-    // TODO: replace with your real profile URLs / email (from LinkedIn).
-    linkedin: "https://www.linkedin.com/in/TODO",
-    github: "https://github.com/TODO",
-    email: "TODO@example.com",
+    linkedin: "https://www.linkedin.com/in/agaman-thapa-58bb4b2a3/",
+    // TODO: replace with your real GitHub profile URL.
+    github: "https://github.com/AgamanThapa",
+    email: "agaman.thapa@gmail.com",
   },
 };
 

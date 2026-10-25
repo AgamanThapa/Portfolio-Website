@@ -125,7 +125,7 @@ export default function Contact() {
                 <SocialLink href={profile.links.github} label="GitHub" icon={<GithubIcon className="h-4 w-4" />} cursor="OPEN" />
                 <SocialLink
                   href={emailHref}
-                  label="Email"
+                  label={isSet(profile.links.email) ? profile.links.email : "Email"}
                   icon={<Mail className="h-4 w-4" />}
                   cursor="CONNECT"
                 />
