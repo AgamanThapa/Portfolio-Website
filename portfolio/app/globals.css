@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: 94 220 255; /* ice cyan */
+  --signal: 61 255 160; /* status green, used sparingly */
+  --mx: 50%;
+  --my: 30%;
+  color-scheme: dark;
+}
+
+/* Konami easter egg: switches the accent to cyber-green */
+html[data-mode="green"] {
+  --accent: 61 255 160;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #060708;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-ink-950 font-sans text-white antialiased;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.3);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Thin technical scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #232832 transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #232832;
+  border-radius: 8px;
+}
+
+/* Custom cursor is only enabled on fine-pointer devices (see Cursor.tsx) */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+html.has-cursor input,
+html.has-cursor textarea {
+  cursor: text !important;
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.045),
+      rgb(255 255 255 / 0.015)
+    );
+    border: 1px solid rgb(255 255 255 / 0.08);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .hairline {
+    border: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  .mono-label {
+    @apply font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-dim;
+  }
+
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .section-y {
+    @apply py-24 sm:py-32;
+  }
+
+  /* Animated underline for links */
+  .link-u {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 1px;
+    transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-u:hover,
+  .link-u:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Cursor-following spotlight on cards */
+  .spotlight {
+    isolation: isolate;
+  }
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(
+      340px circle at var(--sx, 50%) var(--sy, 0%),
+      rgb(var(--accent) / 0.13),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .spotlight:hover::before,
+  .spotlight:focus-within::before {
+    opacity: 1;
+  }
+
+  .text-gradient {
+    background: linear-gradient(180deg, #fff 30%, rgb(255 255 255 / 0.55));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .orbit-spin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin360 90s linear infinite;
+  }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
